@@ -1,0 +1,3 @@
+<agm-map *ngIf="map.touched && map.loaded" [latitude]="map.lat" [longitude]="map.lng" [streetViewControl]="false" [zoom]="12">
+  <agm-marker [latitude]="map.lat" [longitude]="map.lng"></agm-marker>
+</agm-map>
