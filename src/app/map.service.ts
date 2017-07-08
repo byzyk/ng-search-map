@@ -54,15 +54,21 @@ export class MapService {
         text
       }
     ]
-    console.log(`ERROR: <${type}> ${text}`)
+    console.error(`ERROR: <${type}> ${text}`)
+  }
+
+  clearErrors() {
+    this.errors = []
   }
 
   search(term: string) {
     this.loading = true
     this.loaded = false
     this.valid = false
-    this.errors = []
     this.locations = []
+    this.activeId = ''
+
+    this.clearErrors()
 
     return this.http
       .get(this.url + term)

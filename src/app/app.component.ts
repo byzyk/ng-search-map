@@ -9,5 +9,6 @@ export class AppComponent {
   constructor(@Inject('map') private map) {}
 
   title = 'search on map'
-  welcome = 'Search your address'
+  welcome = 'Welcome!'
+  welcomeCopy = 'Srart using app by entering your address above. Only latin characters and numbers allowed.'
 }

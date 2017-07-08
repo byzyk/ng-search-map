@@ -11,8 +11,16 @@ export class SearchComponent implements OnInit {
 
   placeholder = 'Enter address'
 
-  searchFormControl = new FormControl('', [Validators.required])
-  formErrors = [{ type: 'required', text: 'Location cannot be empty' }]
+  private onlyEng = /[A-Za-z0-9]/
+
+  searchFormControl = new FormControl('', [
+    Validators.required,
+    Validators.pattern(this.onlyEng)
+  ])
+  formErrors = [
+    { type: 'required', text: 'Address cannot be empty' },
+    { type: 'pattern', text: 'Only English allowed' }
+  ]
 
   onSubmit(event, search) {
     event.preventDefault()

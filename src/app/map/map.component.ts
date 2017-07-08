@@ -9,5 +9,7 @@ import { Component, OnInit, Inject, Input } from '@angular/core'
 export class MapComponent implements OnInit {
   constructor(@Inject('map') private map) {}
 
+  iconPath = 'assets/pin.png'
+
   ngOnInit() {}
 }

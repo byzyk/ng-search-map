@@ -7,16 +7,32 @@
 
 <div class="content">
   <app-search></app-search>
-  <md-card class="hero-copy" *ngIf="!map.valid && !map.loading">
-    <div *ngIf="!map.isErrors()">{{welcome}}</div>
-    <div *ngIf="map.isErrors()">
+
+  <md-card class="hero" *ngIf="!map.valid && !map.loading">
+    <div *ngIf="!map.isErrors()">
+      <p>{{welcome}}</p>
+      <p>{{welcomeCopy}}</p>
+      <md-card-actions class="hero-actions">
+        <a href="https://github.com/byzyk/ng-search-map" target="_blank" md-raised-button color="accent">
+          Open on GitHub
+        </a>
+      </md-card-actions>
+    </div>
+    <div class="hero-error" *ngIf="map.isErrors()">
       <div *ngFor='let err of map.errors'>
-        {{err.text}}
+        <p>{{err.text}}</p>
       </div>
+      <md-card-actions class="hero-actions">
+        <button md-raised-button color="warn" (click)="map.clearErrors()">
+          OK
+        </button>
+      </md-card-actions>
     </div>
   </md-card>
 
   <md-spinner *ngIf="map.loading" class="loading"></md-spinner>
+
   <app-map *ngIf="map.valid && map.loaded"></app-map>
+
   <app-list *ngIf="map.valid && map.loaded"></app-list>
 </div>

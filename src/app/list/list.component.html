@@ -1,4 +1,4 @@
-<md-list>
+<md-list dense>
   <md-list-item *ngFor="let item of map.locations" (click)="map.move(item)" [ngClass]="{active:isActive(item)}">
     <md-icon class="icon">place</md-icon>
     <span>{{item.formatted_address}}</span>

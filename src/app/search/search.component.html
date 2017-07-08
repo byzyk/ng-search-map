@@ -1,4 +1,4 @@
-<form class="form" (ngSubmit)="onSubmit($event, searchFormControl)">
+<form class="form" (ngSubmit)="onSubmit($event, searchFormControl)" autocomplete="off">
   <md-input-container class="input">
     <input mdInput required placeholder={{placeholder}} name="search" [formControl]="searchFormControl">
     <md-error *ngFor="let err of formErrors">
