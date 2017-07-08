@@ -7,7 +7,7 @@ import { FormControl, Validators } from '@angular/forms'
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  constructor(@Inject('map') private map) {}
+  constructor(@Inject('map') public map) {}
 
   placeholder = 'Enter address'
 

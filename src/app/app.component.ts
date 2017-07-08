@@ -6,7 +6,7 @@ import { Component, Inject } from '@angular/core'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(@Inject('map') private map) {}
+  constructor(@Inject('map') public map) {}
 
   title = 'search on map'
   welcome = 'Welcome!'

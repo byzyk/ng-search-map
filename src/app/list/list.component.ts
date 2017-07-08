@@ -6,7 +6,7 @@ import { Component, OnInit, Inject } from '@angular/core'
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-  constructor(@Inject('map') private map) {}
+  constructor(@Inject('map') public map) {}
 
   isActive(item) {
     return item.place_id === this.map.activeId
