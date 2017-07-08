@@ -33,15 +33,37 @@ export class MapService {
 
   private url: string = `https://maps.googleapis.com/maps/api/geocode/json?key=${API_KEY}&address=`
 
-  loaded: boolean = true
-  touched: boolean = false
+  loading: boolean = false
+  loaded: boolean = false
+  valid: boolean = false
   locations: Array<Object> = []
   lat: number = 0
   lng: number = 0
   activeId: string = ''
+  errors: Array<Object> = []
+
+  isErrors() {
+    return this.errors.length
+  }
+
+  private addError(type, text) {
+    this.errors = [
+      ...this.errors,
+      {
+        type,
+        text
+      }
+    ]
+    console.log(`ERROR: <${type}> ${text}`)
+  }
 
   search(term: string) {
+    this.loading = true
     this.loaded = false
+    this.valid = false
+    this.errors = []
+    this.locations = []
+
     return this.http
       .get(this.url + term)
       .map(this.extractData)
@@ -51,17 +73,25 @@ export class MapService {
           if (data.status === 'OK') {
             this.locations = data.results
             this.move(data.results[0])
+          } else {
+            this.addError(
+              'noResults',
+              'No address found, please try another address.'
+            )
           }
         },
         error => {
-          console.error(error)
+          this.addError('badRequest', 'Error during request.')
         },
-        () => (this.loaded = true)
+        () => {
+          this.loading = false
+          this.loaded = true
+        }
       )
   }
 
   move(item) {
-    if (!this.touched) this.touched = true
+    if (!this.valid) this.valid = true
     if (item.place_id !== this.activeId) {
       const { lat, lng } = item.geometry.location
       this.lat = lat

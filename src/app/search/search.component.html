@@ -1,6 +1,9 @@
-<form class="form" (submit)="onSubmit($event, search.value)">
+<form class="form" (ngSubmit)="onSubmit($event, searchFormControl)">
   <md-input-container class="input">
-    <input mdInput #search placeholder={{placeholder}} [(ngModel)]="term" [ngModelOptions]="{standalone: true}">
+    <input mdInput required placeholder={{placeholder}} name="search" [formControl]="searchFormControl">
+    <md-error *ngFor="let err of formErrors">
+      <span *ngIf="searchFormControl.hasError(err.type)">{{err.text}}</span>
+    </md-error>
   </md-input-container>
   <button md-fab>
     <md-icon>search</md-icon>

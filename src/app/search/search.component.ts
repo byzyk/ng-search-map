@@ -1,4 +1,5 @@
-import { Component, OnInit, Inject, Input } from '@angular/core'
+import { Component, OnInit, Inject } from '@angular/core'
+import { FormControl, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-search',
@@ -6,18 +7,20 @@ import { Component, OnInit, Inject, Input } from '@angular/core'
   styleUrls: ['./search.component.css']
 })
 export class SearchComponent implements OnInit {
-  placeholder = 'Enter location'
+  constructor(@Inject('map') private map) {}
 
-  onSubmit(event, term) {
+  placeholder = 'Enter address'
+
+  searchFormControl = new FormControl('', [Validators.required])
+  formErrors = [{ type: 'required', text: 'Location cannot be empty' }]
+
+  onSubmit(event, search) {
     event.preventDefault()
 
-    this.map.search(term)
-    this.term = ''
+    if (search.valid) {
+      this.map.search(search.value)
+    }
   }
-
-  @Input() term = ''
-
-  constructor(@Inject('map') private map) {}
 
   ngOnInit() {}
 }

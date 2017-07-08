@@ -17,6 +17,12 @@
   flex-flow: column;
 }
 
+.hero-copy {
+  margin: 50px 20px 0;
+  text-transform: uppercase;
+  color: #999;
+}
+
 .loading {
   margin: 40px auto 0;
 }

@@ -7,5 +7,7 @@ import { Component, Inject } from '@angular/core'
 })
 export class AppComponent {
   constructor(@Inject('map') private map) {}
+
   title = 'search on map'
+  welcome = 'Search your address'
 }
